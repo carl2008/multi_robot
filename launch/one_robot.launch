@@ -12,7 +12,7 @@
 
     <!-- Launch Mapping & Navigation-->
     <include file="$(find multi_robot)/launch/navigation.launch" />
-    <node name="simple_cmd_vel_publisher" pkg="multi_robot" type="simple_cmd_vel_publisher.py" output="screen" />
+    <node pkg="multi_robot" type="pattern1.py" name="rosbot_gotopose" output="screen"/>
     <!-- The odometry estimator, throttling, fake laser etc. go here -->
     <!-- All the stuff as from usual robot launch file -->
 </launch>
