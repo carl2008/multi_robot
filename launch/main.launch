@@ -1,6 +1,0 @@
-<launch>
-  <!-- include our robots -->
-  <include file="$(find aiil_rosbot_demo)/launch/all.launch"/>
-  <node pkg ="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/>
-
-</launch>
