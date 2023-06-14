@@ -8,10 +8,11 @@ from geometry_msgs.msg import (
     Twist
 )
 from tf import TransformListener
-
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+import actionlib
 def goToPose():
-    pub_gotopose1 = rospy.Publisher('/robot1/move_base_simple/goal', PoseStamped)
-    pub_gotopose2 = rospy.Publisher('/robot2/move_base_simple/goal', PoseStamped)
+    #pub_gotopose1 = rospy.Publisher('/robot1/move_base_simple/goal', PoseStamped)
+    #pub_gotopose2 = rospy.Publisher('/robot2/move_base_simple/goal', PoseStamped)
     map_frame = rospy.get_param("~map_frame", "map")
     robot_frame = rospy.get_param("~robot_frame", '/base_link')
 
@@ -38,13 +39,26 @@ def goToPose():
     target_pose2.pose.orientation.w = 1
     rospy.loginfo(target_pose1)
     rospy.loginfo(target_pose2)
+    goal1 = MoveBaseGoal()
+    goal1.target_pose = target_pose1
+    goal2 = MoveBaseGoal()
+    goal2.target_pose = target_pose2
     # Send goal
     # Need a little bit of a pause to let the node correctly launch
     rate = rospy.Rate(1)
     rate.sleep()
     rospy.loginfo("Publishing")
-    pub_gotopose1.publish(target_pose1)
-    pub_gotopose2.publish(target_pose2)
+    moveBaseClient1 = actionlib.SimpleActionClient('/robot1/move_base', MoveBaseAction)
+    moveBaseClient1.wait_for_server()
+    moveBaseClient2 = actionlib.SimpleActionClient('/robot2/move_base', MoveBaseAction)
+    moveBaseClient2.wait_for_server()
+    moveBaseClient1.send_goal(goal1)
+    moveBaseClient2.send_goal(goal2)
+    moveBaseClient1.wait_for_result()
+    moveBaseClient2.wait_for_result()
+    #pub_gotopose1.publish(target_pose1)
+    #pub_gotopose2.publish(target_pose2)
+    rospy.loginfo("Both robots reached their goals")
 # Short ROS Node method
 if __name__ == '__main__':
     try:
