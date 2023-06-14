@@ -2,44 +2,26 @@
 
 import rospy
 from geometry_msgs.msg import PoseStamped
-from tf import TransformListener
 
-def goToPose(robot_ns):
-    pub_gotopose = rospy.Publisher(robot_ns + '/move_base_simple/goal', PoseStamped, queue_size=1)
-    map_frame = rospy.get_param("~map_frame", robot_ns +'map')
-    robot_frame = rospy.get_param("~robot_frame",  '/base_link')
+def move_robot1():
+    rospy.init_node('robot1_movebase_node')
 
-    # Create target pose
-    target_pose = PoseStamped()
-    target_pose.header.frame_id = map_frame
-    target_pose.header.stamp = rospy.Time.now()
-    target_pose.pose.position.x = 1
-    target_pose.pose.position.y = 1
-    target_pose.pose.position.z = 0
-    target_pose.pose.orientation.x = 0
-    target_pose.pose.orientation.y = 0
-    target_pose.pose.orientation.z = 0
-    target_pose.pose.orientation.w = 1
+    # Create a publisher to send the goal for robot 1
+    goal_pub = rospy.Publisher('/robot1/move_base_simple/goal', PoseStamped, queue_size=10)
 
-    rospy.loginfo(target_pose)
+    # Create a PoseStamped message with the desired goal
+    goal_msg = PoseStamped()
+    goal_msg.header.frame_id = '/robot1/map'
+    goal_msg.pose.position.x = 1.0  # Adjust the desired x-coordinate
+    goal_msg.pose.position.y = 2.0  # Adjust the desired y-coordinate
+    goal_msg.pose.orientation.w = 1.0  # Adjust the desired orientation
 
-    # Send goal
-    rate = rospy.Rate(1)
-    rate.sleep()
-    rospy.loginfo("Publishing goal for %s", robot_ns)
-    pub_gotopose.publish(target_pose)
+    # Publish the goal message
+    goal_pub.publish(goal_msg)
+    rospy.loginfo('Goal sent for robot 1')
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('rosbot_gotopose', anonymous=True)
-
-        # Move robot1 to the goal pose
-        robot1_ns = 'robot1'
-        goToPose(robot1_ns)
-
-        # Move robot2 to the goal pose
-        #robot2_ns = 'robot2'
-        #goToPose(robot2_ns)
-
+        move_robot1()
     except rospy.ROSInterruptException:
         pass
