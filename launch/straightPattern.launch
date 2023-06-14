@@ -1,3 +1,0 @@
-  <!-- include our robots -->
-  <node name="straightPattern" pkg="multi_robot" type="straightPattern.py" output="screen" />
-</launch>
