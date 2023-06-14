@@ -1,4 +1,0 @@
-<launch>
-  <!-- include our robots -->
-  <include file="$(find aiil_rosbot_demo)/launch/all.launch"/>
-</launch>
