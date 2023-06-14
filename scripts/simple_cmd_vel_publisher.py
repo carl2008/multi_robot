@@ -12,7 +12,7 @@ def simple_cmd_vel_publisher():
     rospy.init_node('simple_cmd_vel_publisher', anonymous=True)
     cmd_vel_pub1 = rospy.Publisher('/robot1/cmd_vel', Twist, queue_size=10)
     cmd_vel_pub2 = rospy.Publisher('/robot2/cmd_vel', Twist, queue_size=10)
-    cmd_vel_pub3 = rospy.Publisher('/robot3/cmd_vel', Twist, queue_size=10)
+    #cmd_vel_pub3 = rospy.Publisher('/robot3/cmd_vel', Twist, queue_size=10)
     pub = rospy.Publisher('common_topic', String, queue_size=10)
     
     target_x = 1.0  # Target position x-coordinate
@@ -37,7 +37,7 @@ def simple_cmd_vel_publisher():
         # Publish the Twist message
         cmd_vel_pub1.publish(cmd_vel)
         cmd_vel_pub2.publish(cmd_vel)
-        cmd_vel_pub3.publish(cmd_vel)
+        #cmd_vel_pub3.publish(cmd_vel)
 
         rate.sleep()
 
