@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
 from geometry_msgs.msg import PoseStamped
@@ -6,8 +6,8 @@ from tf import TransformListener
 
 def goToPose(robot_ns):
     pub_gotopose = rospy.Publisher(robot_ns + '/move_base_simple/goal', PoseStamped, queue_size=1)
-    map_frame = rospy.get_param("~map_frame", 'map')
-    robot_frame = rospy.get_param("~robot_frame", robot_ns + '/base_link')
+    map_frame = rospy.get_param("~map_frame", robot_ns +'map')
+    robot_frame = rospy.get_param("~robot_frame",  '/base_link')
 
     # Create target pose
     target_pose = PoseStamped()
@@ -34,11 +34,11 @@ if __name__ == '__main__':
         rospy.init_node('rosbot_gotopose', anonymous=True)
 
         # Move robot1 to the goal pose
-        robot1_ns = '/robot1'
+        robot1_ns = 'robot1'
         goToPose(robot1_ns)
 
         # Move robot2 to the goal pose
-        robot2_ns = '/robot2'
+        robot2_ns = 'robot2'
         goToPose(robot2_ns)
 
     except rospy.ROSInterruptException:
