@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Implementation inspired by: https://github.com/danielsnider/follow_waypoints/blob/master/src/follow_waypoints/follow_waypoints.py
 
