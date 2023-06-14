@@ -38,8 +38,8 @@ if __name__ == '__main__':
         goToPose(robot1_ns)
 
         # Move robot2 to the goal pose
-        robot2_ns = 'robot2'
-        goToPose(robot2_ns)
+        #robot2_ns = 'robot2'
+        #goToPose(robot2_ns)
 
     except rospy.ROSInterruptException:
         pass
