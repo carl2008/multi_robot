@@ -1,10 +1,5 @@
 <launch>
-  
-
- 
-
-
   <!-- include our robots -->
   <include file="$(find aiil_rosbot_demo)/launch/all.launch"/>
-  <node name="simple_cmd_vel_publisher" pkg="multi_robot" type="simple_cmd_vel_publisher.py" output="screen" />
+  <node name="straightPattern" pkg="multi_robot" type="straightPattern.py" output="screen" />
 </launch>
