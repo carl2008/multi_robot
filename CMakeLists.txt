@@ -159,8 +159,8 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  install(PROGRAMS
-   scripts/simple_cmd_vel_publisher.py
-   scripts/pattern1.py
+   scripts/goalPattern.py
+   scripts/straightPattern.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 install(DIRECTORY launch
@@ -206,4 +206,3 @@ install(DIRECTORY launch
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
